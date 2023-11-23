@@ -10,7 +10,7 @@ Esta es una aplicación Spring Boot que expone un endpoint RESTful. La aplicaci�
 
 Para ejecutar la aplicación, sigue estos pasos:
 
-1. Descarga el archivo `demo-0.0.1-SNAPSHOT.jar` a tu máquina local.
+1. Descarga el archivo `demo-0.0.1-SNAPSHOT.jar` a tu máquina local.(que se encuentra en la raiz del proyecto)
 2. Abre una terminal o línea de comandos.
 3. Navega al directorio donde descargaste el archivo JAR.
 4. Ejecuta el siguiente comando bash:
