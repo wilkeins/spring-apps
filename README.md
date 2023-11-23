@@ -46,3 +46,5 @@ Se deberia ver una respuesta con la siguiente estructura:
 "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYWFhYWFhQGRvbWluaW8uY2wiLCJpYXQiOjE3MDA3NTM1MjcsImV4cCI6MTcwMDc1NDQyN30.Yf199teIEbf2PPwa_VIGk2pFI_g7EPWnwebIi4k7KI7xJ1XcUythizAPYNkVcgtCg6kVql0oZK6r8JQPxBSjOQ",
 "isActive": true
 }
+
+Nota: En la raiz del proyecto se encuentra el diagrama de flijo de la aplicacion con el nombre: Demo.drawio.png
