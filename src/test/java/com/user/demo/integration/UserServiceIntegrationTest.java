@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,6 +44,7 @@ public class UserServiceIntegrationTest {
     @Test
     public void registerUser_EmailAlreadyExists() {
         Users existingUser = new Users();
+        existingUser.setUuid(UUID.randomUUID());
         existingUser.setName("Existing User");
         existingUser.setEmail("exists@dominio.cl");
         existingUser.setPassword("SomeSecurePassword123");

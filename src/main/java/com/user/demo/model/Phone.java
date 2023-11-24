@@ -8,18 +8,16 @@ import lombok.*;
 
 
 @Entity
-@Table(name = "phone")
+@Table(name = "phones")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Phone {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank(message = "El número de teléfono no puede estar vacío")
     @Pattern(regexp = "^[0-9]+$", message = "El número de teléfono debe ser numérico")
     @Size(min = 7, max = 10, message = "El número de teléfono debe tener entre 7 y 10 dígitos")

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public interface UserServiceHelper {
     static void validateUserDto(UserDTO userDto, UserRepository userRepository, AppConfig appConfig) {
@@ -26,6 +27,7 @@ public interface UserServiceHelper {
     }
     static Users createUserEntity(UserDTO userDto, PhoneConverter phoneConverter) {
         Users users = new Users();
+        users.setUuid(UUID.randomUUID());
         users.setName(userDto.name());
         users.setEmail(userDto.email());
         users.setPassword(encodePassword(userDto.password()));
@@ -46,7 +48,7 @@ public interface UserServiceHelper {
 
     default UserResponseDTO convertToUserResponseDTO(Users users) {
         return new UserResponseDTO(
-                users.getId(),
+                users.getUuid(),
                 users.getName(),
                 users.getEmail(),
                 users.getCreated(),
@@ -84,7 +86,6 @@ public interface UserServiceHelper {
             throw new IllegalArgumentException("El código de país no puede estar vacío");
         }
     }
-
 
 }
 

@@ -1,8 +1,5 @@
 package com.user.demo.model;
 
-
-
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +7,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -26,11 +22,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Users {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
-    private UUID id;
-
+    private Long id;
+    @Column(unique = true, nullable = false)
+    private UUID uuid;
     @NotBlank(message = "El nombre no puede estar vacío")
     @Size(max = 100, message = "El nombre no puede tener más de 100 caracteres")
     @Column(nullable = false)
@@ -59,10 +55,6 @@ public class Users {
     public void addPhone(Phone phone) {
         phones.add(phone);
         phone.setUsers(this);
-    }
-    public void removePhone(Phone phone) {
-        phones.remove(phone);
-        phone.setUsers(null);
     }
 
 }
