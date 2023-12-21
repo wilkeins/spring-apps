@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public interface UserServiceHelper {
     static void validateUserDto(UserDTO userDto, UserRepository userRepository, AppConfig appConfig) {
@@ -46,7 +48,7 @@ public interface UserServiceHelper {
         return new BCryptPasswordEncoder().encode(password);
     }
 
-    default UserResponseDTO convertToUserResponseDTO(Users users) {
+/*    default UserResponseDTO convertToUserResponseDTO(Users users) {
         return new UserResponseDTO(
                 users.getUuid(),
                 users.getName(),
@@ -57,7 +59,7 @@ public interface UserServiceHelper {
                 users.getToken(),
                 users.isActive()
         );
-    }
+    }*/
     private static void firstValidationUserDTO(UserDTO userDTO) {
         if (userDTO.name() == null || userDTO.name().isBlank()) {
             throw new IllegalArgumentException("El nombre no puede estar vacío");
@@ -85,6 +87,24 @@ public interface UserServiceHelper {
         if (phoneDTO.countrycode() == null || phoneDTO.countrycode().isBlank()) {
             throw new IllegalArgumentException("El código de país no puede estar vacío");
         }
+    }
+
+    default UserResponseDTO convertToUserResponseDTO(Users users) {
+        List<PhoneDTO> phoneDTOs = users.getPhones().stream()
+                .map(phone -> new PhoneDTO(phone.getNumber(), phone.getCitycode(), phone.getCountrycode()))
+                .collect(Collectors.toList());
+
+        return new UserResponseDTO(
+                users.getUuid(),
+                users.getName(),
+                users.getEmail(),
+                users.getCreated(),
+                users.getModified(),
+                users.getLastLogin(),
+                users.getToken(),
+                users.isActive(),
+                phoneDTOs
+        );
     }
 
 }

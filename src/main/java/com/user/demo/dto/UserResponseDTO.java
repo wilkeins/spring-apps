@@ -1,6 +1,7 @@
 package com.user.demo.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 public record UserResponseDTO(
         UUID id,
@@ -10,5 +11,6 @@ public record UserResponseDTO(
         LocalDateTime modified,
         LocalDateTime lastLogin,
         String token,
-        boolean isActive
+        boolean isActive,
+        List<PhoneDTO> phones
 ) { }

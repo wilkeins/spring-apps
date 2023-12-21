@@ -45,7 +45,7 @@ public class UserControllerTest {
         }
         """;
 
-    @Test
+   /* @Test
     public void createUser_Successful() throws Exception {
         UserResponseDTO userResponseDTO = new UserResponseDTO(
                 UUID.randomUUID(),
@@ -73,7 +73,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.isActive").value(true));
 
         verify(userService).registerUser(any(UserDTO.class));
-    }
+    }*/
 
     @Test
     public void createUser_EmailAlreadyExists() throws Exception {

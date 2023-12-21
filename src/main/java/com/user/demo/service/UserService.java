@@ -7,9 +7,13 @@ import com.user.demo.helper.PhoneConverter;
 import com.user.demo.helper.UserServiceHelper;
 import com.user.demo.model.Users;
 import com.user.demo.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,4 +40,17 @@ public class UserService implements UserServiceHelper {
         users = userRepository.save(users);
         return convertToUserResponseDTO(users);
     }
+    public UserResponseDTO getUserById(Long id) {
+        Users user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + id));
+        return convertToUserResponseDTO(user);
+    }
+
+    public List<UserResponseDTO> searchUsers(String name, String email, Boolean isActive) {
+        List<Users> users = userRepository.findByCriteria(name, email, isActive);
+        return users.stream()
+                .map(this::convertToUserResponseDTO)
+                .collect(Collectors.toList());
+    }
+
 }
